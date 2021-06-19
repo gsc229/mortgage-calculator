@@ -3,4 +3,8 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-  return HttpResponse('<h1>HELLO WORLD</h1>')
+  return render(request, 'pages/index.html')
+
+
+def loan_calculator(request):
+  return render(request, 'pages/loan_calculator.html')
