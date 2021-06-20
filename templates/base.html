@@ -6,11 +6,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% comment %} STYLES {% endcomment %}
-  <link rel='stylesheet' href="{% static 'css/test.css' %}">
+  <!-- Custom -->
+  <!-- Bootstrap -->        
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  <link rel='stylesheet' href="{% static 'css/styles.css' %}">
   <title>Polly Loan Calculator</title>
 </head>
 <body>
   {% block content %}
   {% endblock content %}
+
+  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js '%}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
