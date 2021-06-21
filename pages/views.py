@@ -1,9 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.urls import reverse
 import math
 import re
 import json
 from pages.loanCalculator import calculateLoan
+from pages.bulkCalculate import calculateLoans
+from pages.models import Document
+from pages.forms import UploadFileForm
 
 
 # Create your views here.
@@ -79,13 +83,19 @@ def calculate_loan(request):
     return JsonResponse(data)
 
 def bulk_calculate(request):
-  file = request.POST['bulk_data']
-  print(f"request.FILE: {file}")
-  with open(file, 'r') as f:
-    f_contents = f.readlines()
+  # Handle file upload
+  if request.method == 'POST' and 'bulk_data' in request.FILES:
+    
+    print("POST: ", request.POST)
+    print("FILES: ", request.FILES)
+    file = request.FILES['bulk_data']
+    f_lines_list_bytes = file.readlines()
+    
+    # Calcualte the loans:
+    results = calculateLoans(f_lines_list_bytes)
+    print(f"results: { results }")
+    # Redirect to the document list after POST
+    return render(request, 'pages/bulk_calculate.html')
 
-    print(f"f_contents: {f_contents}")
-
-  
 
   return render(request, 'pages/bulk_calculate.html')
