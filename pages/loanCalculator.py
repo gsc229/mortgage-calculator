@@ -3,6 +3,7 @@ import re
 import json
 
 def calculateLoan(principal, downpayment, yearly_rate, years):
+  """ Returns the monthly payment, total payment, and total interest given principal, downpayment, yearly interest rate and number of years  """
   principal = float(principal) - float(downpayment)
   yearly_rate =  (float(yearly_rate) / 100)
   years = int(years)
@@ -23,8 +24,12 @@ def calculateLoan(principal, downpayment, yearly_rate, years):
 
   return result
 
+def add(a, b):
+  return a + b
 
-# while True:
+# keepcalculating=True
+
+# while keepcalculating:
 
 #   principal = input("What is the loan amount?")
 #   downpayment = input("What is the downpayment?")
@@ -35,4 +40,7 @@ def calculateLoan(principal, downpayment, yearly_rate, years):
 #   result = calculateLoan(principal, downpayment, yearly_rate, years)
 
 #   print(f"result: { result }\n")
+
+#   willContinue = input("Make another calculation? (type: 'Yes' or hit Enter)")
+#   keepcalculating = willContinue == "Yes" or  willContinue == "Y" or willContinue == "yes" or willContinue == "y"
 
