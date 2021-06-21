@@ -5,6 +5,7 @@ import re
 import json
 from pages.loanCalculator import calculateLoan
 
+
 # Create your views here.
 def renderCalculator(request):
   context = {
@@ -14,16 +15,16 @@ def renderCalculator(request):
 
 
 def calculate_loan(request):
-  print(f"request: { request.GET }")
-  amount = request.GET['amount']
-  downpayment = request.GET['downpayment']
-  yearly_rate = request.GET['interest']
-  years = request.GET['term']
+  print("POST: " ,request.POST)
+  amount = request.POST['amount']
+  downpayment = request.POST['downpayment']
+  yearly_rate = request.POST['interest']
+  years = request.POST['term']
 
   if not amount:
     context = {
       "amount_error": "Please Specify the amount Loan Amount.",
-      "values": request.GET
+      "values": request.POST
     }
     return render(request, 'pages/loan_calculator.html', context)
   
@@ -33,21 +34,21 @@ def calculate_loan(request):
   if downpayment and float(downpayment) >= float(amount):
     context = {
       "downpayment_error": "Down payment must be smaller than prinicipal",
-      "values": request.GET
+      "values": request.POST
     }
     return render(request, 'pages/loan_calculator.html', context)
 
   if not yearly_rate:
     context = {
       "interest_error": "Please Specify a Yearly Interest Rate.",
-      "values": request.GET
+      "values": request.POST
     }
     return render(request, 'pages/loan_calculator.html', context)
 
   if not years:
     context = {
       "term_error": "Please specify the number of years",
-      "values": request.GET
+      "values": request.POST
     }
     return render(request, 'pages/loan_calculator.html', context)
 
@@ -56,16 +57,14 @@ def calculate_loan(request):
 
   result = calculateLoan(amount, downpayment, yearly_rate, years)
 
-  if 'no_json' in request.GET:
+  if 'no_json' in request.POST:
 
     context = {
       "monthly_payment": result['monthly_payment'],
       "total_interest": result['total_interest'],
       "total_payment": result['total_payment'],
-      "values": request.GET
+      "values": request.POST
     }
-
-    print(f"context: { context } ")
 
     return render(request, 'pages/loan_calculator.html', context)
 
@@ -78,3 +77,15 @@ def calculate_loan(request):
     }
 
     return JsonResponse(data)
+
+def bulk_calculate(request):
+  file = request.POST['bulk_data']
+  print(f"request.FILE: {file}")
+  with open(file, 'r') as f:
+    f_contents = f.readlines()
+
+    print(f"f_contents: {f_contents}")
+
+  
+
+  return render(request, 'pages/bulk_calculate.html')

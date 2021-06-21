@@ -5,7 +5,8 @@
     <div class='row'>
       <div class='form-container mb-3 col-sm-12 col-md-4'>
         <h4>Enter Details: </h4>
-        <form action="{% url 'calculate_loan' %}">
+        <form action="{% url 'calculate_loan' %}" method="POST">
+        {% csrf_token %}
           <label for="amount-row">Amount</label>
           <div 
           id="amount-row"  

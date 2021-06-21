@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container bulk-calculate-container mt-5">
+  <h1>Bulk Calculate</h1>
+  <form action="{% url 'bulk_calculate' %}" method="POST">
+  {% csrf_token %}
+    <div class="mb-3">
+      <label for="formFile" class="form-label">Upload .txt File</label>
+      <input 
+      name="bulk_data"
+      class="form-control" 
+      type="file" 
+      id="formFile">
+    </div>
+    <button class='btn btn-primary' type="submit">Send File</button>
+  </form>
+</div>
+
+{% endblock content %}
