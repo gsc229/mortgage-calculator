@@ -1,10 +1,114 @@
+{% extends 'base.html' %}
+
 {% block content %}
-<h1>Hello World Loan Calculator</h1>
-<form action=''>
-
-
-</form>
+  <div class='container mt-5  calculator-container'>
+    <div class='row'>
+      <div class='form-container mb-3 col-sm-12 col-md-4'>
+        <h4>Enter Details: </h4>
+        <form action="{% url 'calculate_loan' %}">
+          <label for="principal-row">Amount</label>
+          <div 
+          id="principal-row"  
+          class="form-row">
+            <div class="col-md-8 mb-3 input-group">
+              <span id="principal-dollar" class="input-group-text dollar-span" >$</span>
+              <input 
+              min=100 
+              type="number" 
+              name="principal"
+              value="{{ values.principal }}"
+              class="form-control" 
+              placeholder="Principal" 
+              aria-describedby="principal-dollar">
+              {% if principal_error %}
+                <div 
+                class="error-container mt-2 alert alert-danger col-sm-12">
+                  {{ principal_error }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          <label for="downpayment-row">Down Payment</label>
+          <div id="downpayment-row" class="form-row">
+            <div class="col-md-8 mb-3 input-group">
+              <label class="sr-only">Down Payments</label>
+              <span id="principal-dollar" class="input-group-text dollar-span" >$</span>
+              <input 
+              min=0 
+              type="number" 
+              name="down_payment"
+              value="{{ values.down_payment }}" 
+              class="form-control" 
+              placeholder="Down Payment" 
+              aria-describedby="principal-dollar">
+            </div>
+          </div>
+          <label for="interest-row">Annual Interest</label>
+          <div id="interest-row" class="form-row">
+            <div class="col-md-8 mb-3 input-group">
+              <label class="sr-only">Annual Interest Rate</label>
+              <input 
+              min=0 
+              type="float"
+              class="form-control" 
+              name="interest_rate" 
+              value="{{ values.interest_rate }}" 
+              placeholder="Yearly Interest Rate" 
+              aria-describedby="percent-sign">
+              <span class="input-group-text percent-span" id="percent-sign">%</span>
+              {% if interest_rate_error %}
+                <div 
+                class="error-container mt-2 alert alert-danger col-sm-12">
+                  {{ interest_rate_error }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          <label for="loan-length-row">Loan Length</label>
+          <div id="loan-length-row"  class="form-row">
+            <div class="col-md-8 mb-3 input-group">
+              <label class="sr-only">Loan Length (years)</label>
+              <input 
+              min=1 
+              type="number" 
+              name="loan_term"
+              value="{{values.loan_term}}"
+              class="form-control" 
+              placeholder="(Years)">
+              {% if loan_term_error %}
+                <div 
+                class="error-container mt-2 alert alert-danger col-sm-12">
+                  {{ loan_term_error }}
+                </div>
+              {% endif %}
+            
+            </div>
+          </div>
+          <button type="submit" class="calculate-btn btn btn-primary">Calculate</button>
+          <input type="hidden" name="no_json" value="True">
+        </form>
+      </div>
+      {% if monthly_payment %}
+      
+        <div class="results-container col-sm-12 col-md-8">
+          
+            <div class='result-item'>
+              <h4>Monthly Payment: </h4>
+              <p>${{ monthly_payment }}</p>
+            </div>
+            <div class='result-item'>
+              <h4>Total Interest:  </h4>
+              <p>${{ total_interest }}</p>
+            </div>
+            <div class='result-item'>
+              <h4>Total Payment:  </h4>
+              <p>${{ total_payment }}</p>
+            </div>
+         
+        </div>
+  
+      {% endif %}
+    </div>
+  </div>
+  
 {% endblock content %}
-
-
-

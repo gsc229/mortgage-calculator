@@ -9,6 +9,7 @@ verify_ssl = true
 python-dotenv = "*"
 django = "*"
 django-sass = "*"
+django-livereload-server = "*"
 
 [requires]
 python_version = "3.8"

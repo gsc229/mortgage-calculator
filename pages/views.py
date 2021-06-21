@@ -1,43 +1,81 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import math
 import re
+from loan_calculator.loanCalculator import calculateLoan
+import json
+
 
 # Create your views here.
-def index(request):
-  return render(request, 'pages/index.html')
-
-def loan_calculator(request):
-  return render(request, 'pages/loan_calculator.html')
+def renderCalculator(request):
+  context = {
+    "values": request.GET
+  }
+  return render(request, 'pages/loan_calculator.html', context)
 
 
 def calculate_loan(request):
+  print(f"request: { request.GET }")
+  principal = request.GET['principal']
+  downpayment = request.GET['down_payment']
+  yearly_rate = request.GET['interest_rate']
+  years = request.GET['loan_term']
 
-  principal = request.principal
-  downpayment = request.downpayment
-  yearly_rate = request.yearly_rate.strip("%")
-  years = request.years
+  if not principal:
+    context = {
+      "principal_error": "Please Specify the Principal Loan Amount.",
+      "values": request.GET
+    }
+    return render(request, 'pages/loan_calculator.html', context)
+  
+  if not downpayment:
+    downpayment = 0
+  
+  if downpayment and int(downpayment) >= int(principal):
+    context = {
+      "down_payment_error": "Down payment must be smaller than prinicipal",
+      "values": request.GET
+    }
+    return render(request, 'pages/loan_calculator.html', context)
+
+  if not yearly_rate:
+    context = {
+      "interest_rate_error": "Please Specify a Yearly Interest Rate.",
+      "values": request.GET
+    }
+    return render(request, 'pages/loan_calculator.html', context)
+
+  if not years:
+    context = {
+      "loan_term_error": "Please specify the number of years",
+      "values": request.GET
+    }
+    return render(request, 'pages/loan_calculator.html', context)
+
 
   print(f"P: {principal}, r: {yearly_rate}, t: {years}")
 
-  principal = float(principal) - float(downpayment)
-  yearly_rate =  (float(yearly_rate) / 100)
-  years = int(years)
-  n_months = years * 12
-  monthly_interest = yearly_rate / 12
+  result = calculateLoan(principal, downpayment, yearly_rate, years)
 
-  print(f"P: {principal}, t: {years}, n_months: { n_months }, r: {yearly_rate}, monthly_interest: { monthly_interest }")
+  if 'no_json' in request.GET:
 
-  monthly_payment = principal * (monthly_interest * (1 + monthly_interest) ** n_months) / ((1 + monthly_interest) ** n_months - 1)
-  total_payment = monthly_payment * n_months
-  total_interest = total_payment - principal
+    context = {
+      "monthly_payment": result['monthly_payment'],
+      "total_interest": result['total_interest'],
+      "total_payment": result['total_payment'],
+      "values": request.GET
+    }
 
-  result = {
-    "monthly payment": round(monthly_payment, 2),
-    "total interest": round(total_interest, 2),
-    "total payment": round(total_payment, 2) 
-  }
+    print(f"context: { context } ")
 
-  print(f"result: { result } ")
+    return render(request, 'pages/loan_calculator.html', context)
 
-  return render(request, 'pages/loan_calculator.html', result)
+  else:
+
+    data = {
+      "monthly payment": result['monthly_payment'],
+      "total interest": result['total_interest'],
+      "total payment": result['total_payment'],
+    }
+
+    return JsonResponse(data)
