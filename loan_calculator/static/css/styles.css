@@ -1,0 +1,31 @@
+.navbar h3 {
+  color: white;
+}
+
+.calculator-container {
+  /* .form-container{
+    background-color: lightcoral;
+    .form-row{
+      background-color: antiquewhite;
+    }
+  }
+
+  .results-container{
+    background-color: aquamarine;
+    .loan-results-list{
+      background-color: lightgreen;
+    }
+  } */
+}
+
+.calculator-container .dollar-span {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none;
+}
+
+.calculator-container .percent-span {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: none;
+}
