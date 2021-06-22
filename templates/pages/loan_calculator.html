@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block content %}
   <div class='container mt-5  calculator-container'>
     <div class='row'>
@@ -33,7 +32,6 @@
           <label for="downpayment-row">Down Payment</label>
           <div id="downpayment-row" class="form-row">
             <div class="col-md-8 mb-3 input-group">
-              <label class="sr-only">Down Payments</label>
               <span id="amount-dollar" class="input-group-text dollar-span" >$</span>
               <input 
               min=0 
@@ -48,7 +46,6 @@
           <label for="interest-row">Annual Interest</label>
           <div id="interest-row" class="form-row">
             <div class="col-md-8 mb-3 input-group">
-              <label class="sr-only">Annual Interest Rate</label>
               <input 
               min=0 
               type="number"
@@ -70,7 +67,6 @@
           <label for="loan-length-row">Loan Length</label>
           <div id="loan-length-row"  class="form-row">
             <div class="col-md-8 mb-3 input-group">
-              <label class="sr-only">Loan Length (years)</label>
               <input 
               min=1 
               type="number" 
@@ -88,7 +84,7 @@
             
             </div>
           </div>
-          <button type="submit" class="calculate-btn btn btn-primary">Calculate</button>
+          <button type="submit" class="calculate-btn btn">Calculate</button>
           <input type="hidden" name="no_json" value="True">
         </form>
       </div>
@@ -108,9 +104,7 @@
               <h4>Total Payment:  </h4>
               <p>${{ total_payment }}</p>
             </div>
-         
         </div>
-  
       {% endif %}
     </div>
   </div>

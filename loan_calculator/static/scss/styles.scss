@@ -1,7 +1,15 @@
+$primary: #10284e;
+
 .navbar{
-  h3{
+  background-color: $primary;
+  a{
     color: white;
   }
+}
+
+.btn{
+  background-color: $primary;
+  color: white;
 }
 
 .calculator-container{
@@ -21,6 +29,24 @@
   
 }
 
-.bulk-calculate-container{
+.file-input{
+  padding: 10px;
+}
+
+.bulk-results-container{
   //background-color: lightblue;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  .result-inner{
+    border: 1px solid black;
+    padding: 5px;
+    .result-item{
+      p{
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
 }

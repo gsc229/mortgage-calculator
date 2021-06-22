@@ -11,12 +11,42 @@
       <label for="formFile" class="form-label">Upload .txt File</label>
       <input 
       name="bulk_data"
-      class="form-control" 
+      class="form-control file-input" 
       type="file" 
       id="formFile">
     </div>
-    <button class='btn btn-primary' type="submit">Send File</button>
+    <button class='btn' type="submit">Send Data</button>
   </form>
+  {% if data %}
+  <div class="container mt-5  bulk-results-container">
+    {% for result in data  %}
+      <div class="bulk-result">
+        <h6>Loan {{ forloop.counter }}</h6>
+        <div class='result-inner'>
+          <div class='result-item'>
+            <strong><p>Monthly Payment: </p></strong>
+            <p>${{ result.monthly_payment }}</p>
+          </div>
+          <div class='result-item'>
+            <strong><p>Total Interest:  </p></strong>
+            <p>${{ result.total_interest }}</p>
+          </div>
+          <div class='result-item'>
+            <strong><p>Total Payment:  </p></strong>
+            <p>${{ result.total_payment }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+
+    <div class="container mt-3 rejected-data">
+      <h6>Rejected Data: </h6>
+      {{ rejected|length }}
+    </div>
+
+  {% endif %}
+
 </div>
 
 {% endblock content %}

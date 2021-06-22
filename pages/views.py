@@ -85,9 +85,7 @@ def calculate_loan(request):
 def bulk_calculate(request):
   # Handle file upload
   if request.method == 'POST' and 'bulk_data' in request.FILES:
-    
-    print("POST: ", request.POST)
-    print("FILES: ", request.FILES)
+
     file = request.FILES['bulk_data']
     f_lines_list_bytes = file.readlines()
     
@@ -95,7 +93,9 @@ def bulk_calculate(request):
     results = calculateLoans(f_lines_list_bytes)
     print(f"results: { results }")
     # Redirect to the document list after POST
-    return render(request, 'pages/bulk_calculate.html')
+
+
+    return render(request, 'pages/bulk_calculate.html', results)
 
 
   return render(request, 'pages/bulk_calculate.html')
