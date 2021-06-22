@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load humanize %}
+
 {% block content %}
 <div class="container bulk-calculate-container mt-5">
   <h1>Bulk Calculate</h1>
@@ -40,15 +42,15 @@
         <div class='result-inner'>
           <div class='result-item'>
             <strong><p>Monthly Payment: </p></strong>
-            <p>${{ result.monthly_payment }}</p>
+            <p>${{ result.monthly_payment|intcomma }}</p>
           </div>
           <div class='result-item'>
             <strong><p>Total Interest:  </p></strong>
-            <p>${{ result.total_interest }}</p>
+            <p>${{ result.total_interest|intcomma }}</p>
           </div>
           <div class='result-item'>
             <strong><p>Total Payment:  </p></strong>
-            <p>${{ result.total_payment }}</p>
+            <p>${{ result.total_payment|intcomma }}</p>
           </div>
         </div>
       </div>

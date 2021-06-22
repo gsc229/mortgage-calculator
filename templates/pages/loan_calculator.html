@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+
+{% load humanize %}
+
 {% block content %}
   <div class='container mt-5  calculator-container'>
     <div class='row'>
@@ -94,15 +97,15 @@
           
             <div class='result-item'>
               <h4>Monthly Payment: </h4>
-              <p>${{ monthly_payment }}</p>
+              <p>${{ monthly_payment|intcomma }}</p>
             </div>
             <div class='result-item'>
               <h4>Total Interest:  </h4>
-              <p>${{ total_interest }}</p>
+              <p>${{ total_interest|intcomma }}</p>
             </div>
             <div class='result-item'>
               <h4>Total Payment:  </h4>
-              <p>${{ total_payment }}</p>
+              <p>${{ total_payment|intcomma }}</p>
             </div>
         </div>
       {% endif %}
