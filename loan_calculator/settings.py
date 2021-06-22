@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_sass',
     'livereload',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
