@@ -3,9 +3,20 @@ import re
 import json
 
 def calculateLoan(principal, downpayment, yearly_rate, years):
+  """ Returns the monthly payment, total payment, and total interest given principal, downpayment, yearly interest rate and number of years  """
+  
+  if type(principal) == str:
+    principal = re.findall(r"[-+]?\d*\.\d+|\d+", principal)[0]
+
+  if type(downpayment) == str:
+    downpayment = re.findall(r"[-+]?\d*\.\d+|\d+", downpayment)[0]
+
+  if type(yearly_rate) == str:
+    yearly_rate = re.findall(r"[-+]?\d*\.\d+|\d+", yearly_rate)[0]
+
   principal = float(principal) - float(downpayment)
   yearly_rate =  (float(yearly_rate) / 100)
-  years = int(years)
+  years = float(years)
   n_months = years * 12
   monthly_interest = yearly_rate / 12
 
@@ -19,20 +30,4 @@ def calculateLoan(principal, downpayment, yearly_rate, years):
     "total_payment": round(total_payment, 2) 
   }
 
-  
-
   return result
-
-
-# while True:
-
-#   principal = input("What is the loan amount?")
-#   downpayment = input("What is the downpayment?")
-#   yearly_rate = input("What is the interest rate?\n (%, i.e. 5.5% or 5.5 = .055, .5% or .5 = .0055)").strip("%")
-#   years = input("How many years is the loan?")
-#   blank = input()
-
-#   result = calculateLoan(principal, downpayment, yearly_rate, years)
-
-#   print(f"result: { result }\n")
-

@@ -1,29 +1,30 @@
 {% extends 'base.html' %}
-
 {% block content %}
   <div class='container mt-5  calculator-container'>
     <div class='row'>
       <div class='form-container mb-3 col-sm-12 col-md-4'>
         <h4>Enter Details: </h4>
-        <form action="{% url 'calculate_loan' %}">
-          <label for="principal-row">Amount</label>
+        <form action="{% url 'calculate_loan' %}" method="POST">
+        {% csrf_token %}
+          <label for="amount-row">Amount</label>
           <div 
-          id="principal-row"  
+          id="amount-row"  
           class="form-row">
             <div class="col-md-8 mb-3 input-group">
-              <span id="principal-dollar" class="input-group-text dollar-span" >$</span>
+              <span id="amount-dollar" class="input-group-text dollar-span" >$</span>
               <input 
               min=100 
-              type="number" 
-              name="principal"
-              value="{{ values.principal }}"
+              type="number"
+              step="any"
+              name="amount"
+              value="{{ values.amount }}"
               class="form-control" 
-              placeholder="Principal" 
-              aria-describedby="principal-dollar">
-              {% if principal_error %}
+              aria-describedby="amount-dollar">
+              {% if amount_error %}
                 <div 
+                id="amount_error"
                 class="error-container mt-2 alert alert-danger col-sm-12">
-                  {{ principal_error }}
+                  {{ amount_error }}
                 </div>
               {% endif %}
             </div>
@@ -31,35 +32,34 @@
           <label for="downpayment-row">Down Payment</label>
           <div id="downpayment-row" class="form-row">
             <div class="col-md-8 mb-3 input-group">
-              <label class="sr-only">Down Payments</label>
-              <span id="principal-dollar" class="input-group-text dollar-span" >$</span>
+              <span id="amount-dollar" class="input-group-text dollar-span" >$</span>
               <input 
               min=0 
-              type="number" 
-              name="down_payment"
-              value="{{ values.down_payment }}" 
-              class="form-control" 
-              placeholder="Down Payment" 
-              aria-describedby="principal-dollar">
+              type="number"
+              step="any"
+              name="downpayment"
+              value="{{ values.downpayment }}" 
+              class="form-control"
+              aria-describedby="amount-dollar">
             </div>
           </div>
           <label for="interest-row">Annual Interest</label>
           <div id="interest-row" class="form-row">
             <div class="col-md-8 mb-3 input-group">
-              <label class="sr-only">Annual Interest Rate</label>
               <input 
               min=0 
-              type="float"
+              type="number"
+              step="any"
               class="form-control" 
-              name="interest_rate" 
-              value="{{ values.interest_rate }}" 
-              placeholder="Yearly Interest Rate" 
+              name="interest" 
+              value="{{ values.interest }}"
               aria-describedby="percent-sign">
               <span class="input-group-text percent-span" id="percent-sign">%</span>
-              {% if interest_rate_error %}
+              {% if interest_error %}
                 <div 
+                id="interest_error"
                 class="error-container mt-2 alert alert-danger col-sm-12">
-                  {{ interest_rate_error }}
+                  {{ interest_error }}
                 </div>
               {% endif %}
             </div>
@@ -67,24 +67,24 @@
           <label for="loan-length-row">Loan Length</label>
           <div id="loan-length-row"  class="form-row">
             <div class="col-md-8 mb-3 input-group">
-              <label class="sr-only">Loan Length (years)</label>
               <input 
               min=1 
               type="number" 
-              name="loan_term"
-              value="{{values.loan_term}}"
+              name="term"
+              value="{{values.term}}"
               class="form-control" 
               placeholder="(Years)">
-              {% if loan_term_error %}
+              {% if term_error %}
                 <div 
+                id="term_error"
                 class="error-container mt-2 alert alert-danger col-sm-12">
-                  {{ loan_term_error }}
+                  {{ term_error }}
                 </div>
               {% endif %}
             
             </div>
           </div>
-          <button type="submit" class="calculate-btn btn btn-primary">Calculate</button>
+          <button type="submit" class="calculate-btn btn">Calculate</button>
           <input type="hidden" name="no_json" value="True">
         </form>
       </div>
@@ -104,9 +104,7 @@
               <h4>Total Payment:  </h4>
               <p>${{ total_payment }}</p>
             </div>
-         
         </div>
-  
       {% endif %}
     </div>
   </div>

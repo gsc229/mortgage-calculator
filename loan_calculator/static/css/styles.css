@@ -1,21 +1,14 @@
-.navbar h3 {
+.navbar {
+  background-color: #10284e;
+}
+
+.navbar a {
   color: white;
 }
 
-.calculator-container {
-  /* .form-container{
-    background-color: lightcoral;
-    .form-row{
-      background-color: antiquewhite;
-    }
-  }
-
-  .results-container{
-    background-color: aquamarine;
-    .loan-results-list{
-      background-color: lightgreen;
-    }
-  } */
+.btn {
+  background-color: #10284e;
+  color: white;
 }
 
 .calculator-container .dollar-span {
@@ -28,4 +21,24 @@
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-left: none;
+}
+
+.file-input {
+  padding: 10px;
+}
+
+.bulk-results-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bulk-results-container .result-inner {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.bulk-results-container .result-inner .result-item p {
+  padding: 0;
+  margin: 0;
 }

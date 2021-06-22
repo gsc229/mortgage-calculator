@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container bulk-calculate-container mt-5">
+  <h1>Bulk Calculate</h1>
+  
+  <form action="{% url 'bulk_calculate' %}" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+    <div class="mb-3">
+      <label for="formFile" class="form-label">Upload .txt File</label>
+      <input 
+      name="bulk_data"
+      class="form-control file-input" 
+      type="file" 
+      id="formFile">
+    </div>
+    <div class="col-12">
+    <div class="form-check mb-3">
+      <input 
+      class="form-check-input" 
+      type="checkbox" 
+      name='send_json'
+      value='True'
+      id="json_option">
+      <label 
+      class="form-check-label" 
+      for="json_option">
+        Send JSON results
+      </label>
+    </div>
+  </div>
+    <button class='btn' type="submit">Send Data</button>
+    
+  </form>
+  {% if data %}
+  <div class="container mt-5  bulk-results-container">
+    {% for result in data  %}
+      <div class="bulk-result">
+        <h6>Loan {{ forloop.counter }}</h6>
+        <div class='result-inner'>
+          <div class='result-item'>
+            <strong><p>Monthly Payment: </p></strong>
+            <p>${{ result.monthly_payment }}</p>
+          </div>
+          <div class='result-item'>
+            <strong><p>Total Interest:  </p></strong>
+            <p>${{ result.total_interest }}</p>
+          </div>
+          <div class='result-item'>
+            <strong><p>Total Payment:  </p></strong>
+            <p>${{ result.total_payment }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+
+    <div class="container mt-3 rejected-data">
+      <h6>Rejected Data: </h6>
+      {{ rejected|length }}
+    </div>
+
+  {% endif %}
+
+</div>
+
+{% endblock content %}
