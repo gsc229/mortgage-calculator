@@ -1,0 +1,34 @@
+amount: 100000
+interest: 5.5%
+downpayment: 20000
+term: 30
+
+amount: 200000
+interest: 6.5%
+downpayment: 10000
+term: 50
+
+amount: "pizza"
+interest: 5.5%
+downpayment: "cheese"
+term: 30
+
+amount: 100000
+interest: 5.5%
+downpayment: 20000
+term: 30
+
+amount: 100000
+interest: 5.5%
+downpayment: 20000
+term: 30
+
+amount: 100000
+interest: 5.5%
+downpayment: 20000
+term: 30
+
+amount: 100000
+interest: 5.5%
+downpayment: 20000
+term: 30
