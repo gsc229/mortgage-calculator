@@ -44,7 +44,7 @@
 >```
 >Data should be separated by a space.
 >There is a loanData.txt file in the root directory for you to try.
->Also, there is a 'Send JSON' option in the bulk-calculate endpoint for you to get back raw JSON Data.
+>Also, there is a 'Send JSON' option at the /bulk-calculate endpoint for you to get back raw JSON Data.
 ## Testing
 > In the pipenv shell run:
 >```
