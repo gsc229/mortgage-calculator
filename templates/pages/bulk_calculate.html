@@ -6,7 +6,6 @@
   
   <form action="{% url 'bulk_calculate' %}" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
-  
     <div class="mb-3">
       <label for="formFile" class="form-label">Upload .txt File</label>
       <input 
@@ -15,7 +14,23 @@
       type="file" 
       id="formFile">
     </div>
+    <div class="col-12">
+    <div class="form-check mb-3">
+      <input 
+      class="form-check-input" 
+      type="checkbox" 
+      name='send_json'
+      value='True'
+      id="json_option">
+      <label 
+      class="form-check-label" 
+      for="json_option">
+        Send JSON results
+      </label>
+    </div>
+  </div>
     <button class='btn' type="submit">Send Data</button>
+    
   </form>
   {% if data %}
   <div class="container mt-5  bulk-results-container">

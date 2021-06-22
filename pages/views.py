@@ -83,6 +83,9 @@ def calculate_loan(request):
     return JsonResponse(data)
 
 def bulk_calculate(request):
+
+  print(request.POST)
+
   # Handle file upload
   if request.method == 'POST' and 'bulk_data' in request.FILES:
 
@@ -92,10 +95,18 @@ def bulk_calculate(request):
     # Calcualte the loans:
     results = calculateLoans(f_lines_list_bytes)
     print(f"results: { results }")
-    # Redirect to the document list after POST
-
-
-    return render(request, 'pages/bulk_calculate.html', results)
+    if 'send_json' in request.POST:
+      for i, result in enumerate(results['data']):
+        updated = {
+          "monthly payment": result['monthly_payment'],
+          "total interest": result['total_interest'],
+          "total payment": result['total_payment'],
+        }
+        results['data'][i] = updated
+      return JsonResponse(results)
+    else:
+      return render(request, 'pages/bulk_calculate.html', results)
+      
 
 
   return render(request, 'pages/bulk_calculate.html')
