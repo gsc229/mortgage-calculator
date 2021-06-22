@@ -1,5 +1,7 @@
+import os
 from django.test import TestCase
 from pages.loanCalculator import calculateLoan
+from pages.bulkCalculate import calculateLoans
 from django.urls import reverse, resolve
 from pages.views import calculate_loan
 
@@ -68,6 +70,38 @@ class TestCalc(TestCase):
     self.assertEqual(result['monthly_payment'], 454.23)
     self.assertEqual(result['total_payment'], 163523.23)
     self.assertEqual(result['total_interest'], 83523.23)
+
+
+  def test_bulk_calculator_chages_bytes_to_strings(self):
+
+    result = {}
+
+    with open('loanData.txt', 'r') as f:
+      f_contents = f.readlines()
+      f_contents = [bytes(string, 'utf-8') for string in f_contents] # data will be sent as bytes through the file upload
+      result = calculateLoans(f_contents)
+      
+    self.assertTrue("data" in result)
+    self.assertTrue("rejected" in result)
+    self.assertEqual(len(result["data"]), 5)
+    self.assertEqual(len(result['rejected']), 1)
+
+  def test_bulk_calculator_case_insensitive(self):
+    result = {}
+
+    with open('loanData.txt', 'r') as f:
+      f_contents = f.readlines()
+      # turns the lines to upper case and then to bytes
+      f_contents = [bytes(string.upper(), 'utf-8') for string in f_contents] # data will be sent as bytes through the file upload
+      
+      print(f_contents)
+      result = calculateLoans(f_contents)
+      print(result)
+    self.assertTrue("data" in result)
+    self.assertTrue("rejected" in result)
+    self.assertEqual(len(result["data"]), 5)
+    self.assertEqual(len(result['rejected']), 1)
+
 
 
   def test_calculate_loan_url(self):

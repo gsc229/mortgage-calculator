@@ -19,7 +19,6 @@ def renderCalculator(request):
 
 
 def calculate_loan(request):
-  print("POST: " ,request.POST)
   amount = request.POST['amount']
   downpayment = request.POST['downpayment']
   yearly_rate = request.POST['interest']
@@ -84,17 +83,14 @@ def calculate_loan(request):
 
 def bulk_calculate(request):
 
-  print(request.POST)
-
   # Handle file upload
   if request.method == 'POST' and 'bulk_data' in request.FILES:
 
     file = request.FILES['bulk_data']
     f_lines_list_bytes = file.readlines()
-    
+    print(type(f_lines_list_bytes[0]), f"file: { f_lines_list_bytes }")
     # Calcualte the loans:
     results = calculateLoans(f_lines_list_bytes)
-    print(f"results: { results }")
     if 'send_json' in request.POST:
       for i, result in enumerate(results['data']):
         updated = {

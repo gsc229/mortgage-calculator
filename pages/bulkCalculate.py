@@ -16,6 +16,8 @@ def calculateLoans(f_contents):
   varSet = {}
   f_contents = [line.decode("utf-8").strip() for line in f_contents]
   for line in f_contents:
+    line = line.lower()
+    # if the line was a blank line, then it's an empty string
     if len(line):
       if re.findall(r"amount", line):
         varSet["amount"] = findNumbers(line)
