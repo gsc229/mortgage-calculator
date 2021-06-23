@@ -11,3 +11,4 @@ setTimeout(function(){
 setTimeout(function(){
   $('#term_error').fadeOut('slow')
 }, 3000)
+

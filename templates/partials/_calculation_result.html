@@ -1,16 +1,17 @@
 {% load static %}
+{% load humanize %}
 
-<div class="result-container col-sm-12 col-md-8">
-    <div class='result-item'>
-      <h4>Monthly Payment: </h4>
-      <p>${{ monthly_payment }}</p>
-    </div>
-    <div class='result-item'>
-      <h4>Total Interest:  </h4>
-      <p>${{ total_interest }}</p>
-    </div>
-    <div class='result-item'>
-      <h4>Total Payment:  </h4>
-      <p>${{ total_payment }}</p>
-    </div>
+<div class="calculation-result">
+  <div class='result-item'>
+    <strong><p>Monthly Payment: </p></strong>
+    <p>${{ result.monthly_payment|intcomma }}</p>
+  </div>
+  <div class='result-item'>
+    <strong><p>Total Interest:  </p></strong>
+    <p>${{ result.total_interest|intcomma }}</p>
+  </div>
+  <div class='result-item'>
+    <strong><p>Total Payment:  </p></strong>
+    <p>${{ result.total_payment|intcomma }}</p>
+  </div>
 </div>

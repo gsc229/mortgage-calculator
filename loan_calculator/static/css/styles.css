@@ -23,6 +23,11 @@
   border-left: none;
 }
 
+.result-item p {
+  padding: 0;
+  margin: 0;
+}
+
 .file-input {
   padding: 10px;
 }
@@ -36,9 +41,4 @@
 .bulk-results-container .result-inner {
   border: 1px solid black;
   padding: 5px;
-}
-
-.bulk-results-container .result-inner .result-item p {
-  padding: 0;
-  margin: 0;
 }
