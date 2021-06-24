@@ -10,6 +10,7 @@ python-dotenv = "*"
 django = "*"
 django-sass = "*"
 django-livereload-server = "*"
+cactus = "*"
 
 [requires]
 python_version = "3.8"

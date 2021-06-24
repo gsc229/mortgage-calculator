@@ -52,3 +52,17 @@
 >```
 >You can find the test file in the pages. It's called test_calc.py.
 >It tests the root calculation which generates the results.
+## Dev Tools
+> In the pipenv shell run:
+>```
+>$ py manage.py livereload
+>```
+> Then run the srever
+>```
+>$ py manage.py runserver
+>```
+> Now the server will automatically update when the code base changes.
+> Django Sass
+>```
+>$ py manage.py sass loan_calculator/static/scss loan_calculator/static/css --watch 
+>```
