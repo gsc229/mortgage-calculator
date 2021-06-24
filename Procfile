@@ -1,1 +1,1 @@
-web: gunicorn btre.wsgi
+web: gunicorn loan_calulator.wsgi
