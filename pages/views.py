@@ -112,3 +112,8 @@ def bulk_calculate(request):
 
 
   return render(request, 'pages/bulk_calculate.html')
+
+
+def amortization_schedule(request):
+  print(request.POST)
+  return render(request, 'pages/amortization.html')
