@@ -27,7 +27,7 @@
 > localhost:8000
 >|endpoints| request | description  |
 >|--|--|--|
->| / | POST  | takes you to a basic calculator |
+>| /calculate | POST  | takes you to a basic calculator |
 >| /bulk-calculate | POST  | file uploader for bulk calculations |
 >### Bulk Calculations
 >You can upload .txt files with data in the form:
@@ -66,3 +66,5 @@
 >```
 >$ py manage.py sass loan_calculator/static/scss loan_calculator/static/css --watch 
 >```
+
+
