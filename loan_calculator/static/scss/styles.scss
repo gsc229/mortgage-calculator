@@ -29,6 +29,13 @@ $primary: #10284e;
   
 }
 
+.result-item{
+  p{
+    padding: 0;
+    margin: 0;
+  }
+}
+
 .file-input{
   padding: 10px;
 }
@@ -42,11 +49,13 @@ $primary: #10284e;
   .result-inner{
     border: 1px solid black;
     padding: 5px;
-    .result-item{
-      p{
-        padding: 0;
-        margin: 0;
-      }
-    }
   }
 }
+
+.amortization-schedule-table{
+  td{
+    font-weight: 500;
+  }
+}
+
+

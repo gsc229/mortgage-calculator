@@ -4,7 +4,7 @@ from django.urls import reverse
 import math
 import re
 import json
-from pages.loanCalculator import calculateLoan
+from pages.loanCalculator import calculateLoan, getAmortizationSchedule
 from pages.bulkCalculate import calculateLoans
 from pages.models import Document
 from pages.forms import UploadFileForm
@@ -63,10 +63,12 @@ def calculate_loan(request):
   if 'no_json' in request.POST:
 
     context = {
-      "monthly_payment": result['monthly_payment'],
-      "total_interest": result['total_interest'],
-      "total_payment": result['total_payment'],
-      "values": request.POST
+      "result": {
+        "monthly_payment": result['monthly_payment'],
+        "total_interest": result['total_interest'],
+        "total_payment": result['total_payment'],
+        "values": request.POST
+      }
     }
 
     return render(request, 'pages/loan_calculator.html', context)
@@ -88,15 +90,19 @@ def bulk_calculate(request):
 
     file = request.FILES['bulk_data']
     f_lines_list_bytes = file.readlines()
-    print(type(f_lines_list_bytes[0]), f"file: { f_lines_list_bytes }")
     # Calcualte the loans:
     results = calculateLoans(f_lines_list_bytes)
+
     if 'send_json' in request.POST:
       for i, result in enumerate(results['data']):
         updated = {
           "monthly payment": result['monthly_payment'],
           "total interest": result['total_interest'],
           "total payment": result['total_payment'],
+          "amount": result['amount'],
+          "downpayment": result['downpayment'],
+          "interest": result['interest'],
+          "term": result['term']
         }
         results['data'][i] = updated
       return JsonResponse(results)
@@ -106,3 +112,16 @@ def bulk_calculate(request):
 
 
   return render(request, 'pages/bulk_calculate.html')
+
+
+def amortization_schedule(request):
+  print(request.POST)
+  amount = request.POST['amount']
+  downpayment = request.POST['downpayment']
+  yearly_rate = request.POST['interest']
+  years = request.POST['term']
+
+
+  context = getAmortizationSchedule(amount, downpayment, yearly_rate, years)
+
+  return render(request, 'pages/amortization.html', context)

@@ -1,0 +1,8 @@
+<form action={% url 'amortization' %} method="POST" >
+  {% csrf_token %}
+  <input type="hidden" name="amount" value={{ result.amount }}>
+  <input type="hidden" name="downpayment" value={{ result.downpayment }}>
+  <input type="hidden" name="interest" value={{ result.interest }}>
+  <input type="hidden" name="term" value={{ result.term }}>
+  <button class="amortize">Amortization Table</button>
+</form>

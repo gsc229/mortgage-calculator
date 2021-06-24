@@ -37,9 +37,41 @@
   {% if data %}
   <div class="container mt-5  bulk-results-container">
     {% for result in data  %}
-      <div class="bulk-result">
+      {% include 'partials/_bulk_calculation_result.html' %}
+    {% endfor %}
+    </div>
+
+    <div class="container mt-3 rejected-data">
+      <h6>Rejected Data: </h6>
+      {{ rejected|length }}
+    </div>
+
+  {% endif %}
+
+</div>
+
+{% endblock content %}
+
+{% comment %} 
+<div class="bulk-result">
         <h6>Loan {{ forloop.counter }}</h6>
         <div class='result-inner'>
+          <div class='result-item'>
+            <strong><p>Amount: </p></strong>
+            <p>${{ result.amount|intcomma }}</p>
+          </div>
+          <div class='result-item'>
+            <strong><p>Down Payment: </p></strong>
+            <p>${{ result.downpayment|intcomma }}</p>
+          </div>
+          <div class='result-item'>
+            <strong><p>Interest Rate: </p></strong>
+            <p>{{ result.interest|intcomma }}</p>
+          </div>
+          <div class='result-item'>
+            <strong><p>Loan Term: </p></strong>
+            <p>{{ result.monthly_payment|intcomma }} years</p>
+          </div>
           <div class='result-item'>
             <strong><p>Monthly Payment: </p></strong>
             <p>${{ result.monthly_payment|intcomma }}</p>
@@ -54,16 +86,6 @@
           </div>
         </div>
       </div>
-    {% endfor %}
-    </div>
 
-    <div class="container mt-3 rejected-data">
-      <h6>Rejected Data: </h6>
-      {{ rejected|length }}
-    </div>
 
-  {% endif %}
-
-</div>
-
-{% endblock content %}
+{% endcomment %}

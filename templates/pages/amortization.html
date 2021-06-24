@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+<div class="container mt-3 amortization-container">
+  <h1>Amortization Schedule</h1>
+  {% if schedule %}
+    <div class="schedule-inputs">
+      <div>
+        <p><strong>Pricipal: </strong>${{ inputs.amount|intcomma }}</p>
+        <p><strong>Down Payment: </strong>${{ inputs.amount|intcomma }}</p>
+        <p><strong>Rate: </strong>{{ inputs.interest }}%</p>
+        <p><strong>Term: </strong>{{ inputs.term }} years</p>
+        <p><strong>Monthly Payment: </strong> ${{ totals.monthly_payment }}</p>
+      </div>
+    </div>
+    {% include 'amortization/amortization_table.html' %}
+  {% endif %}  
+</div>
+
+{% endblock content %}

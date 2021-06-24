@@ -1,0 +1,22 @@
+{% load humanize %}
+
+<table class="table table-striped  amortization-schedule-table"  style="width:100%">
+  <thead>
+    <tr>
+      <th scope="col" >Month #</th>
+      <th scope="col" >Interest Payment</th>
+      <th scope="col" >Principal Payment</th>
+      <th scope="col" >Balance</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for month in schedule %}
+      <tr>
+        <td scope="row">{{ forloop.counter }}</td>
+        <td>${{ month.interest_payment|intcomma }}</td>
+        <td>${{ month.principal_payment|intcomma }}</td>
+        <td>${{ month.balance|intcomma }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

@@ -2,8 +2,6 @@ import re
 from io import BytesIO
 from pages.loanCalculator import calculateLoan
 
-
-
 def findNumbers(line):
   # regex will find and extract all int or float numbers
   if re.findall(r"[-+]?\d*\.\d+|\d+", line):
@@ -36,7 +34,7 @@ def calculateLoans(f_contents):
         varSet = {}
   
 
-  calculations = [ calculateLoan(varSet["amount"], varSet["downpayment"], varSet["interest"], varSet["term"]) for varSet in calculationsList ]
+  calculations = [ { **calculateLoan(varSet["amount"], varSet["downpayment"], varSet["interest"], varSet["term"]), **varSet} for varSet in calculationsList ]
   
   return {
     'data': calculations,
