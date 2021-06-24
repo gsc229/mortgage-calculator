@@ -10,6 +10,7 @@ django = "*"
 django-sass = "*"
 django-livereload-server = "*"
 python-dotenv = "*"
+django-heroku = "*"
 
 [requires]
 python_version = "3.8"
