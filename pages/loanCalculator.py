@@ -29,9 +29,9 @@ def calculateLoan(principal, downpayment, yearly_rate, years):
     "total_interest": round(total_interest, 2),
     "total_payment": round(total_payment, 2),
     "inputs": {
-      "amount": principal + float(downpayment),
-      "downpayment": float(downpayment),
-      "interest": yearly_rate,
+      "amount": round(principal + float(downpayment), 2),
+      "downpayment": round(float(downpayment), 2),
+      "interest": yearly_rate * 100,
       "term": years
     }
   }

@@ -42,3 +42,7 @@
   border: 1px solid black;
   padding: 5px;
 }
+
+.amortization-schedule-table td {
+  font-weight: 500;
+}
