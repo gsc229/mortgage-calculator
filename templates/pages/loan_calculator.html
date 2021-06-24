@@ -24,11 +24,7 @@
               class="form-control" 
               aria-describedby="amount-dollar">
               {% if amount_error %}
-                <div 
-                id="amount_error"
-                class="error-container mt-2 alert alert-danger col-sm-12">
-                  {{ amount_error }}
-                </div>
+                {% include 'partials/_error_alert.html' %}
               {% endif %}
             </div>
           </div>
@@ -44,6 +40,9 @@
               value="{{ values.downpayment }}" 
               class="form-control"
               aria-describedby="amount-dollar">
+               {% if downpayment_error %}
+                {% include 'partials/_error_alert.html' %}
+              {% endif %}
             </div>
           </div>
           <label for="interest-row">Annual Interest</label>
@@ -59,11 +58,7 @@
               aria-describedby="percent-sign">
               <span class="input-group-text percent-span" id="percent-sign">%</span>
               {% if interest_error %}
-                <div 
-                id="interest_error"
-                class="error-container mt-2 alert alert-danger col-sm-12">
-                  {{ interest_error }}
-                </div>
+                {% include 'partials/_error_alert.html' %}
               {% endif %}
             </div>
           </div>
@@ -78,11 +73,7 @@
               class="form-control" 
               placeholder="(Years)">
               {% if term_error %}
-                <div 
-                id="term_error"
-                class="error-container mt-2 alert alert-danger col-sm-12">
-                  {{ term_error }}
-                </div>
+                {% include 'partials/_error_alert.html' %}
               {% endif %}
             
             </div>

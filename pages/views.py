@@ -26,7 +26,8 @@ def calculate_loan(request):
 
   if not amount:
     context = {
-      "amount_error": "Please Specify the amount Loan Amount.",
+      "amount_error": True,
+      "error_message": "Please Specify the amount Loan Amount.",
       "values": request.POST
     }
     return render(request, 'pages/loan_calculator.html', context)
@@ -36,21 +37,25 @@ def calculate_loan(request):
   
   if downpayment and float(downpayment) >= float(amount):
     context = {
-      "downpayment_error": "Down payment must be smaller than prinicipal",
+      "downpayment_error": True,
+      "error_message": "Down payment must be smaller than prinicipal",
       "values": request.POST
     }
+    print(context)
     return render(request, 'pages/loan_calculator.html', context)
 
   if not yearly_rate:
     context = {
-      "interest_error": "Please Specify a Yearly Interest Rate.",
+      "interest_error": True,
+      "error_message": "Please Specify a Yearly Interest Rate.",
       "values": request.POST
     }
     return render(request, 'pages/loan_calculator.html', context)
 
   if not years:
     context = {
-      "term_error": "Please specify the number of years",
+      "term_error": True,
+      "error_message": "Please specify the number of years",
       "values": request.POST
     }
     return render(request, 'pages/loan_calculator.html', context)
