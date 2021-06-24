@@ -11,6 +11,7 @@ django-sass = "*"
 django-livereload-server = "*"
 python-dotenv = "*"
 django-heroku = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"
