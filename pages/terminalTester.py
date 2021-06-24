@@ -1,4 +1,4 @@
-from loanCalculator import amortizationSchedule, calculateLoan
+from loanCalculator import getAmortizationSchedule, calculateLoan
 
 
 
@@ -16,7 +16,7 @@ while keepcalculating:
 
   print(f"result: { result }\n")
 
-  amortizationSchedule(principal, downpayment, yearly_rate, years)
+  getAmortizationSchedule(principal, downpayment, yearly_rate, years)
 
   willContinue = input("Make another calculation? (type: 'Yes' or hit Enter)")
   keepcalculating = willContinue == "Yes" or  willContinue == "Y" or willContinue == "yes" or willContinue == "y"

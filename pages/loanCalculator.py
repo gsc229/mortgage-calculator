@@ -27,12 +27,21 @@ def calculateLoan(principal, downpayment, yearly_rate, years):
   result = {
     "monthly_payment": round(monthly_payment, 2),
     "total_interest": round(total_interest, 2),
-    "total_payment": round(total_payment, 2) 
+    "total_payment": round(total_payment, 2),
+    "inputs": {
+      "amount": principal + float(downpayment),
+      "downpayment": float(downpayment),
+      "interest": yearly_rate,
+      "term": years
+    }
   }
 
   return result
 
-def amortizationSchedule(principal, downpayment, yearly_rate, years):
+def getAmortizationSchedule(principal, downpayment, yearly_rate, years):
+
+  totals = calculateLoan(principal, downpayment, yearly_rate, years)
+
   if type(principal) == str:
     principal = re.findall(r"[-+]?\d*\.\d+|\d+", principal)[0]
 
@@ -69,4 +78,8 @@ def amortizationSchedule(principal, downpayment, yearly_rate, years):
 
     schedule.append(result)
   print(schedule)
-  return schedule
+  return {
+    "schedule": schedule,
+    "totals": totals,
+    "inputs": totals["inputs"]
+  }

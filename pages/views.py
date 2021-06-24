@@ -4,7 +4,7 @@ from django.urls import reverse
 import math
 import re
 import json
-from pages.loanCalculator import calculateLoan
+from pages.loanCalculator import calculateLoan, getAmortizationSchedule
 from pages.bulkCalculate import calculateLoans
 from pages.models import Document
 from pages.forms import UploadFileForm
@@ -116,4 +116,12 @@ def bulk_calculate(request):
 
 def amortization_schedule(request):
   print(request.POST)
-  return render(request, 'pages/amortization.html')
+  amount = request.POST['amount']
+  downpayment = request.POST['downpayment']
+  yearly_rate = request.POST['interest']
+  years = request.POST['term']
+
+
+  context = getAmortizationSchedule(amount, downpayment, yearly_rate, years)
+
+  return render(request, 'pages/amortization.html', context)

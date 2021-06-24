@@ -4,7 +4,17 @@
 
 {% block content %}
 <div class="container mt-3 amortization-container">
-  <h1>Amortization Schedule</h1>  
+  <h1>Amortization Schedule</h1>
+  {% if schedule %}
+  {% include 'amortization/amortization_table.html' %}
+  
+  <div class="raw">
+    {{ inputs }} <br><br>
+    {{ totals }} <br><br>
+    {{ schedule }} 
+  </div>
+  
+  {% endif %}  
 </div>
 
 {% endblock content %}
