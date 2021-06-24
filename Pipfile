@@ -12,6 +12,7 @@ django-livereload-server = "*"
 python-dotenv = "*"
 django-heroku = "*"
 gunicorn = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.8"
