@@ -64,6 +64,5 @@
 > Now the server will automatically update when the code base changes.
 > Django Sass
 >```
->```
 >$ py manage.py sass loan_calculator/static/scss loan_calculator/static/css --watch 
->``
+>```
